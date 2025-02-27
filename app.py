@@ -1,5 +1,5 @@
-import streamlit as st
 import openai
+import streamlit as st
 from gtts import gTTS
 import speech_recognition as sr
 import os
@@ -7,16 +7,15 @@ import os
 # Set your OpenAI API key
 openai.api_key = "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"
 
-# Function to get AI response from GPT-3 (or GPT-4) using the correct API
+# Function to get AI response using the new API (v1.0.0+)
 def get_ai_response(prompt):
     try:
-        # Correct API call using Completion.create() method
-        response = openai.Completion.create(
+        # Correct API call using the new format for completions
+        response = openai.chat_completions.create(
             model="gpt-3.5-turbo",  # GPT-3 model (or "gpt-4" if you have access)
-            prompt=prompt,
-            max_tokens=150
+            messages=[{"role": "user", "content": prompt}]
         )
-        return response.choices[0].text.strip()
+        return response['choices'][0]['message']['content'].strip()
     except Exception as e:
         return f"Error: {e}"
 
