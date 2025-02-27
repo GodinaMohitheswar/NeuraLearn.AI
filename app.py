@@ -5,7 +5,7 @@ import speech_recognition as sr
 import os
 
 # Set your OpenAI API key
-openai.api_key = "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"
+openai.api_key = "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"
 
 # Function to get AI response using the old API (Completion)
 def get_ai_response(prompt):
