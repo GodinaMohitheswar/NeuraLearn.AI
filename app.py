@@ -7,17 +7,16 @@ import os
 # Set your OpenAI API key
 openai.api_key = "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"
 
-# Function to get AI response from GPT-3 (or GPT-4) using the new API
+# Function to get AI response from GPT-3 (or GPT-4) using the updated API method
 def get_ai_response(prompt):
     try:
-        # Updated call using the chat-completions endpoint
-        response = openai.chat_completions.create(
-            model="gpt-3.5-turbo",  # GPT-3 model (or "gpt-4" if you have access)
-            messages=[
-                {"role": "user", "content": prompt}
-            ]
+        # Use Completion.create for the latest OpenAI API
+        response = openai.Completion.create(
+            model="gpt-3.5-turbo",  # or "gpt-4" if you have access
+            prompt=prompt,
+            max_tokens=150  # Adjust this based on your need
         )
-        return response['choices'][0]['message']['content'].strip()
+        return response.choices[0].text.strip()
     except Exception as e:
         return f"Error: {e}"
 
